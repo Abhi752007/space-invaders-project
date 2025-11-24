@@ -3,7 +3,10 @@ import pygame
 print("Pygame imported successfully.")
 print("pygame")
 
-print("enemy")
+print("enem")
+print("trial")
+
+
 
 
 
