@@ -5,6 +5,7 @@ print("pygame")
 
 print("enem")
 print("trial")
+print("trial2")
 
 
 
