@@ -1,5 +1,6 @@
 # Player module
-
+import bullet
+#import pygame
 
 Playerimage=pygame.image.load('player.png')
 playerX=370  # starting coordinates of the plyaer
@@ -36,7 +37,7 @@ def player(x,y):
                 if event.type==pygame.KEY_SPACE:
                     if bullet_state=="ready":   # to ensure only one bullet is fired at a time
                         bulletX=playerX   # get the current x coordinate of the player to fire the bullet from there
-                    fire_bullet(playerX,bulletY)
+                    bullet.fire_bullet(playerX,bulletY)
                     playerX=bulletX   # to align the bullet with the player
 
             if event.type==pygame.KEYUP:   # .KEYUP checks if any key is released
@@ -57,8 +58,8 @@ def player(x,y):
             bullet_state="ready"
 
         if bullet_state=="fire":
-            fire_bullet(bulletX,bulletY)
-            bulletY -=bulletY_change   # moving the bullet upwards
+            bullet.fire_bullet(bulletX,bulletY)
+            bullet.bulletY -=bullet.bulletY_change   # moving the bullet upwards
 
 
         player(playerX,playerY)
