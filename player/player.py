@@ -1,5 +1,6 @@
 # Player module
 import bullet
+import collision
 #import pygame
 
 Playerimage=pygame.image.load('player.png')
@@ -13,9 +14,8 @@ def player(x,y):
 
 
 # Game's Loop
-
-    running=True
-    while running:
+running=True
+while running:
 
         # bg color
         screen.fill((0,0,0))
@@ -60,6 +60,14 @@ def player(x,y):
         if bullet_state=="fire":
             bullet.fire_bullet(bulletX,bulletY)
             bullet.bulletY -=bullet.bulletY_change   # moving the bullet upwards
+
+        score_value=0
+        #Collision
+        collisions=collision.iscollision(enemyX, enemyY, bulletX, bulletY)   # Check for collision between enemy and bullet imported from collision.py
+        if collisions:
+            bulletY=480
+            bullet_state="ready"
+            score_value+=1
 
 
         player(playerX,playerY)
