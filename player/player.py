@@ -1,6 +1,7 @@
 # Player module
 import bullet
 import collision
+import enemy
 #import pygame
 
 Playerimage=pygame.image.load('player.png')
@@ -32,7 +33,7 @@ while running:
                 if event.key==pygame.K_LEFT or event.key==pygame.K_a:   # .key checks which key is pressed
                     playerX_change -=5   # move left
                 if event.key==pygame.K_RIGHT or event.key==pygame.K_d:
-                    playerX_chang +=5   # move right
+                    playerX_change +=5   # move right
 
                 if event.type==pygame.KEY_SPACE:
                     if bullet_state=="ready":   # to ensure only one bullet is fired at a time
@@ -63,7 +64,7 @@ while running:
 
         score_value=0
         #Collision
-        collisions=collision.iscollision(enemyX, enemyY, bulletX, bulletY)   # Check for collision between enemy and bullet imported from collision.py
+        collisions = collision.iscollision(enemy.enemy_X, enemy.enemy_Y, bulletX, bulletY)  # Check for collision between enemy and bullet
         if collisions:
             bulletY=480
             bullet_state="ready"
