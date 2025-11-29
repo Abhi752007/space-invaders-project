@@ -10,6 +10,7 @@ enemy_x_change = []
 enemy_Y_change = []
 num_of_enemy = 12
 
+
 # spawning the enemies
 for i in range(num_of_enemy):
     enemy_image.append(pygame.image.load('space-invaders.png'))

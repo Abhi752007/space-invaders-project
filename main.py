@@ -25,5 +25,8 @@ while running:
         # To close the window
         if event.type == pygame.QUIT:
             running = False
->>>>>>> f8991b27562370d7e9500325f50d0f59dcec03b0
+<<<<<<< HEAD
+=======
+
+>>>>>>> 59041fe480e5625492952a35e30c9fdcaefcd0cd
 
