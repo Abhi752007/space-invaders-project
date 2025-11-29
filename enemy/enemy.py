@@ -44,3 +44,4 @@ for i in range(num_of_enemy):
         print(score)
         enemy_X[i] = random.randint(0,800)
         enemy_Y[i] = random.randint(50,150)
+
