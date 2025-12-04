@@ -6,24 +6,23 @@ class bullet:
     player = player.player()
 
     def __init__(self):
-        
-        self.bulletX = 0
+
+        self.bulletX = self.player.playerX
         self.bulletY = 480
         self.bulletY_change = 0.2
         self.bullet_state = "ready"
         self.bulletImg = pygame.image.load("assets/bullet.png")
 
-    def fire_bullet(self):
+    def fire_bullet(self,playerx):
         self.bullet_state = "fire"
         self.bulletY = 480
-        self.bulletX = self.player.playerX
+        self.bulletX = playerx
 
-    def handle_input(self,event):
+    def handle_input(self,event,playerx):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and self.bullet_state == "ready":
-
-                self.bulletX = self.player.playerX
-                self.fire_bullet()
+                
+                self.fire_bullet(playerx)
 
     def update(self):
         if self.bullet_state == "fire":
