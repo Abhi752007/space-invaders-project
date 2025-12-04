@@ -1,32 +1,39 @@
-#SPACE INVADERS
-
 import pygame
+import player
+import bullet
+import enemy 
+import collision
 
 pygame.init()
 
-running = True
+player = player.player()
+enemy = enemy.enemy()
+bullet = bullet.bullet()
 
-# display
-HEIGHT = 600
-WIDTH = 800
-game_name = "Space Invaders"
-pygame.display.set_caption(game_name)
-#game_icon = pygame.image.load("rocket.png")
-#pygame.display.set_icon(game_icon)
-screen = pygame.display.set_mode((WIDTH,HEIGHT))
+screen = pygame.display.set_mode((800, 600))
+running = True
 
 
 while running:
-
     screen.fill((0, 0, 0))
 
     for event in pygame.event.get():
-
-        # To close the window
         if event.type == pygame.QUIT:
             running = False
-<<<<<<< HEAD
-=======
 
->>>>>>> 59041fe480e5625492952a35e30c9fdcaefcd0cd
+        player.handle_input(event)
+        bullet.handle_input(event)
+
+    # Update
+    player.update()
+    enemy.update()
+    bullet.update()
+
+    # Draw
+    player.draw(screen)
+    enemy.draw(screen)
+    bullet.draw(screen)
+
+    pygame.display.update()
+
 
