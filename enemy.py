@@ -4,17 +4,31 @@ import random
 class enemy:
 
     def __init__(self):
-        self.enemyX = 0
-        self.enemyY = 0
-        self.enemyY_change = 0.2
-        self.enemyImg = pygame.image.load("assets/asteroid.png")
-        self.enemyX = random.randint(0, 736)
-        self.enemyY = random.randint(50, 150)
+        
+        self.enemyImg =[]
+        self.enemyX = []
+        self.enemyY = []
+        self.no_of_enemies=4
+        self.enemyY_change = 0.05
+
+        for i in range(self.no_of_enemies):
+            self.enemyImg.append(pygame.image.load("assets/asteroid.png"))
+            self.enemyX.append(random.randint(10, 736))
+            self.enemyY.append(random.randint(-150, -50))
 
     def update(self):
-        self.enemyY += self.enemyY_change
+
+        for i in range(self.no_of_enemies):
+            self.enemyY[i] += self.enemyY_change
+
+            # enemy repositioning
+            if self.enemyY[i] > 600:
+                self.enemyX[i] = random.randint(10, 736)
+                self.enemyY[i] = random.randint(-150, -50)
 
 
     def draw(self,screen):
-        screen.blit(self.enemyImg, (self.enemyX, self.enemyY))
+
+        for i in range(self.no_of_enemies):
+            screen.blit(self.enemyImg[i], (self.enemyX[i], self.enemyY[i]))
 

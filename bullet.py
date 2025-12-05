@@ -16,12 +16,13 @@ class bullet:
     def fire_bullet(self,playerx):
         self.bullet_state = "fire"
         self.bulletY = 480
-        self.bulletX = playerx
+        self.bulletX = playerx + 17
 
     def handle_input(self,event,playerx):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and self.bullet_state == "ready":
-                
+                self.bulletX = playerx + 17
+                self.bulletY = 480
                 self.fire_bullet(playerx)
 
     def update(self):
