@@ -1,5 +1,9 @@
 import player
 import pygame
+from pygame import mixer
+mixer.init()
+bullet_sound = mixer.Sound("assets/laser.mp3")
+
 
 class bullet:
 
@@ -24,6 +28,7 @@ class bullet:
                 self.bulletX = playerx + 17
                 self.bulletY = 480
                 self.fire_bullet(playerx)
+                bullet_sound.play()
 
     def update(self):
         if self.bullet_state == "fire":

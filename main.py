@@ -1,5 +1,7 @@
 import pygame 
 pygame.init()
+from pygame import mixer
+mixer.init()
 #import scores
 import random
 import player
@@ -17,6 +19,9 @@ player = player.player()
 enemy = enemy.enemy()
 bullet = bullet.bullet()
 collision = collision.collision()
+bullet_sound = mixer.Sound("assets/laser.mp3")
+
+
 screen = pygame.display.set_mode((800, 600))
 running = True
 def show_score():
@@ -41,7 +46,7 @@ while running:
 
 
     for i in range(enemy.no_of_enemies):
-
+        # bullet hits enemy
         if collision.is_collision(enemy.enemyX[i],enemy.enemyY[i],bullet.bulletX,bullet.bulletY):
             bullet.bullet_state = "ready"
             #print(45)
@@ -49,7 +54,10 @@ while running:
 
             enemy.enemyX[i] = random.randint(10, 736)
             enemy.enemyY[i] = random.randint(-150, -50)
-
+        #enemy collides with player
+        if enemy.enemyY[i]>player.playerY:
+            running = False
+    
     # Draw
     enemy.draw(screen)
     bullet.draw(screen)
