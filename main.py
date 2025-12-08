@@ -56,7 +56,7 @@ while running:
             if collision.is_collision(asteroid.asteroidX[i],asteroid.asteroidY[i],bullet.bulletX,bullet.bulletY):
                 bullet.bullet_state = "ready"
                 #print(45)
-                scores += 5
+                scores += 20
 
                 asteroid.asteroidX[i] = random.randint(10, 736)
                 asteroid.asteroidY[i] = random.randint(-150, -50)
@@ -82,7 +82,7 @@ while running:
                     running = False
 
         # LEVEL TRANSITION TO LEVEL 2
-        if scores >= 5 and not level_triggered:
+        if scores >= 500 and not level_triggered:
             ui.show_level_transition(screen, 2)
             level = 2
             level_triggered = True
@@ -99,7 +99,7 @@ while running:
             if collision.is_collision(enemyShip.enemyShipX[i],enemyShip.enemyShipY[i],bullet.bulletX,bullet.bulletY):
                 bullet.bullet_state = "ready"
                 #print(45)
-                scores += 10
+                scores += 20
 
                 enemyShip.enemyShipX[i] = random.randint(10, 736)
                 enemyShip.enemyShipY[i] = random.randint(-150, -100)
