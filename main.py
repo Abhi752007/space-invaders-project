@@ -28,26 +28,8 @@ running = True
 def show_score():
     score_text = font.render(f"Score: {scores}", True, (255, 255, 255))  # white color
     screen.blit(score_text, (10, 10))  # top-left corner
-scores=0
-
-
-# game_over_screen = True
-# def game_over():
-#     while game_over_screen:
-#         screen.blit(background, (0, 0))
-#         over=pygame.font.Font("freesansbold.ttf",64)
-#         play_again=pygame.font.Font("freesansbold.ttf",16)
-#         over_txt = over.render("GAME OVER", True, (255, 255, 255))
-#         play = play_again.render("PLAY AGAIN (y/n)", True, (255, 255, 255))
-#         screen.blit(over_txt, (225,250))
-#         screen.blit(play, (270, 314))
-
-#         for event in pygame.event.get():
-#             if event == pygame.K_y:
-#                 running = True
-#             if event == pygame.K_y:
-#                 running = False      
-
+scores=0 
+level = 1
 
 while running:
     screen.blit(background, (0, 0))
@@ -61,49 +43,55 @@ while running:
 
     # Update
     player.update()
-    asteroid.update()
     bullet.update()
 
+    if level == 1:
+        asteroid.update()
 
-    for i in range(asteroid.no_of_enemies):
-        # bullet hits asteroid
-        if collision.is_collision(asteroid.asteroidX[i],asteroid.asteroidY[i],bullet.bulletX,bullet.bulletY):
-            bullet.bullet_state = "ready"
-            #print(45)
-            scores += 5
 
-            asteroid.asteroidX[i] = random.randint(10, 736)
-            asteroid.asteroidY[i] = random.randint(-150, -50)
+        level_triggered = False
+        for i in range(asteroid.no_of_enemies):
+            # bullet hits asteroid
+            if collision.is_collision(asteroid.asteroidX[i],asteroid.asteroidY[i],bullet.bulletX,bullet.bulletY):
+                bullet.bullet_state = "ready"
+                #print(45)
+                scores += 5
 
-        if collision.is_collision(
-                asteroid.asteroidX[i], asteroid.asteroidY[i],
-                player.playerX, player.playerY):
+                asteroid.asteroidX[i] = random.randint(10, 736)
+                asteroid.asteroidY[i] = random.randint(-150, -50)
 
-            play_again = ui.game_over_screen(screen, scores)
+            if collision.is_collision(
+                    asteroid.asteroidX[i], asteroid.asteroidY[i],
+                    player.playerX, player.playerY):
 
-            if play_again:
-                # RESET GAME
-                scores = 0
-                level = 1
-                level_triggered = False
+                play_again = ui.game_over_screen(screen, scores)
 
-                player = player.__class__()
-                asteroid = enemy.asteroid()
-                bullet = bullet.__class__()
+                if play_again:
+                    # RESET GAME
+                    scores = 0
+                    level = 1
+                    level_triggered = False
 
-                continue
-            else:
-                running = False
+                    player = player.__class__()
+                    asteroid = enemy.asteroid()
+                    bullet = bullet.__class__()
 
-    # LEVEL TRANSITION TO LEVEL 2
-    if scores >= 500 and not level_triggered:
-        ui.show_level_transition(screen, 2)
-        level = 2
-        level_triggered = True
-        asteroid.asteroidY_change = 0.06   # Increase enemy speed in level 2
+                    continue
+                else:
+                    running = False
+
+        # LEVEL TRANSITION TO LEVEL 2
+        if scores >= 50 and not level_triggered:
+            ui.show_level_transition(screen, 2)
+            level = 2
+            level_triggered = True
+
+        asteroid.draw(screen)
+
+    if level == 2:
+        pass
 
     # DRAW ELEMENTS
-    asteroid.draw(screen)
     bullet.draw(screen)
     player.draw(screen)
     show_score()
