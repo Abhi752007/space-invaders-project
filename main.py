@@ -8,6 +8,7 @@ import player
 import bullet
 import enemy 
 import collision
+import ui
 
 
 
@@ -74,21 +75,37 @@ while running:
             asteroid.asteroidX[i] = random.randint(10, 736)
             asteroid.asteroidY[i] = random.randint(-150, -50)
 
-        # asteroid hits the player
-        if collision.is_collision(asteroid.asteroidX[i],asteroid.asteroidY[i],player.playerX,player.playerY):
-            bullet.bullet_state = "ready"
-            # running = False
-            # game_over()
+        if collision.is_collision(
+                asteroid.asteroidX[i], asteroid.asteroidY[i],
+                player.playerX, player.playerY):
 
+            play_again = ui.game_over_screen(screen, scores)
 
+            if play_again:
+                # RESET GAME
+                scores = 0
+                level = 1
+                level_triggered = False
 
-        
-    
-    # Draw
+                player = player.__class__()
+                asteroid = enemy.asteroid()
+                bullet = bullet.__class__()
+
+                continue
+            else:
+                running = False
+
+    # LEVEL TRANSITION TO LEVEL 2
+    if scores >= 500 and not level_triggered:
+        ui.show_level_transition(screen, 2)
+        level = 2
+        level_triggered = True
+        asteroid.asteroidY_change = 0.06   # Increase enemy speed in level 2
+
+    # DRAW ELEMENTS
     asteroid.draw(screen)
     bullet.draw(screen)
     player.draw(screen)
     show_score()
 
     pygame.display.update()
-
