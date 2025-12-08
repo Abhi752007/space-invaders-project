@@ -11,20 +11,23 @@ import collision
 import ui
 
 
-
+# creating objects
 player = player.player()
 asteroid = enemy.asteroid()
 enemyShip = enemy.enemyShip()
 bullet = bullet.bullet()
 collision = collision.collision()
 
+# display
 font = pygame.font.Font(None, 32)
 background = pygame.image.load("assets/bg3.png")
 pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load("assets/ufo.png")
 bullet_sound = mixer.Sound("assets/laser.mp3")
 screen = pygame.display.set_mode((800, 600))
+
 running = True
+
 
 def show_score():
     score_text = font.render(f"Score: {scores}", True, (255, 255, 255))  # white color
@@ -32,6 +35,8 @@ def show_score():
 scores=0 
 level = 1
 
+
+# main loop
 while running:
     screen.blit(background, (0, 0))
 
@@ -46,9 +51,7 @@ while running:
     player.update()
     bullet.update()
 
-    if level == 1:
-        asteroid.update()
-
+    if level == 1: # checking currently if level 1 
 
         level_triggered = False
         for i in range(asteroid.no_of_enemies):
@@ -81,17 +84,16 @@ while running:
                 else:
                     running = False
 
-        # LEVEL TRANSITION TO LEVEL 2
+        # level transition
         if scores >= 500 and not level_triggered:
             ui.show_level_transition(screen, 2)
             level = 2
             level_triggered = True
 
+        asteroid.update()
         asteroid.draw(screen)
 
-    if level == 2:
-        enemyShip.update()
-        enemyShip.draw(screen)
+    if level == 2: # checking currently if level 2
 
         # player bullet and enemy collision
         for i in range(enemyShip.no_of_enemies):
@@ -128,11 +130,15 @@ while running:
                         continue
                     else:
                         running = False
+        
+        enemyShip.update()
+        enemyShip.draw(screen)
 
 
-    # DRAW ELEMENTS
+    # draw elements
     bullet.draw(screen)
     player.draw(screen)
+
     show_score()
 
     pygame.display.update()
