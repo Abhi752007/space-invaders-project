@@ -14,6 +14,7 @@ import ui
 
 player = player.player()
 asteroid = enemy.asteroid()
+enemyShip = enemy.enemyShip()
 bullet = bullet.bullet()
 collision = collision.collision()
 
@@ -81,7 +82,7 @@ while running:
                     running = False
 
         # LEVEL TRANSITION TO LEVEL 2
-        if scores >= 50 and not level_triggered:
+        if scores >= 5 and not level_triggered:
             ui.show_level_transition(screen, 2)
             level = 2
             level_triggered = True
@@ -89,7 +90,45 @@ while running:
         asteroid.draw(screen)
 
     if level == 2:
-        pass
+        enemyShip.update()
+        enemyShip.draw(screen)
+
+        # player bullet and enemy collision
+        for i in range(enemyShip.no_of_enemies):
+            # bullet hits enemy ship
+            if collision.is_collision(enemyShip.enemyShipX[i],enemyShip.enemyShipY[i],bullet.bulletX,bullet.bulletY):
+                bullet.bullet_state = "ready"
+                #print(45)
+                scores += 10
+
+                enemyShip.enemyShipX[i] = random.randint(10, 736)
+                enemyShip.enemyShipY[i] = random.randint(-150, -100)
+                enemyShip.bullet_state[i] = "ready"
+                enemyShip.bulletX[i] = enemyShip.enemyShipX[i]
+                enemyShip.bulletY[i] = enemyShip.enemyShipY[i]
+
+            # if enemy or its bullet collide with player
+            if collision.is_collision(
+                        enemyShip.enemyShipX[i], enemyShip.enemyShipY[i],
+                        player.playerX, player.playerY) or collision.is_collision(enemyShip.bulletX[i],enemyShip.bulletY[i],player.playerX, player.playerY):
+
+                    play_again = ui.game_over_screen(screen, scores)
+
+                    if play_again:
+                        # RESET GAME
+                        scores = 0
+                        level = 1
+                        level_triggered = False
+
+                        player = player.__class__()
+                        asteroid = enemy.asteroid()
+                        enemyShip = enemy.enemyShip()
+                        bullet = bullet.__class__()
+
+                        continue
+                    else:
+                        running = False
+
 
     # DRAW ELEMENTS
     bullet.draw(screen)
