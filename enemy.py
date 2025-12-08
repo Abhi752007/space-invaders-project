@@ -60,6 +60,7 @@ class enemyShip:
 
 
 
+
     def update(self):
 
         for i in range(self.no_of_enemies):
@@ -76,6 +77,13 @@ class enemyShip:
                 self.bulletY[i] += self.bulletY_change
                 if self.bulletY[i] > 600:
                     self.bullet_state[i] = "ready"
+
+            if self.enemyShipY[i] > 600:
+                self.enemyShipX[i] = random.randint(10, 736)
+                self.enemyShipY[i] = random.randint(-150, -100)
+                self.bullet_state[i] = "ready"
+                self.bulletX[i] = self.enemyShipX[i]
+                self.bulletY[i] = self.enemyShipY[i]
 
 
     def draw(self,screen):

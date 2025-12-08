@@ -59,7 +59,7 @@ while running:
             if collision.is_collision(asteroid.asteroidX[i],asteroid.asteroidY[i],bullet.bulletX,bullet.bulletY):
                 bullet.bullet_state = "ready"
                 #print(45)
-                scores += 20
+                scores += 25
 
                 asteroid.asteroidX[i] = random.randint(10, 736)
                 asteroid.asteroidY[i] = random.randint(-150, -50)
@@ -101,7 +101,7 @@ while running:
             if collision.is_collision(enemyShip.enemyShipX[i],enemyShip.enemyShipY[i],bullet.bulletX,bullet.bulletY):
                 bullet.bullet_state = "ready"
                 #print(45)
-                scores += 20
+                scores += 25
 
                 enemyShip.enemyShipX[i] = random.randint(10, 736)
                 enemyShip.enemyShipY[i] = random.randint(-150, -100)
