@@ -142,3 +142,4 @@ while running:
     show_score()
 
     pygame.display.update()
+    

@@ -58,13 +58,10 @@ class enemyShip:
             self.bullet_state.append("ready")
             self.e_bulletImg.append(pygame.image.load("assets/e_bullet.png"))
 
-
-
-
     def update(self):
 
         for i in range(self.no_of_enemies):
-            # horizontal movement
+            # vertical movement
             self.enemyShipY[i] += self.enemyShipY_change
 
             # fire bullet downward

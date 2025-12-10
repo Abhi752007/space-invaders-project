@@ -13,9 +13,9 @@ FONT_SMALL = pygame.font.Font(None, 30)
 HIGHSCORE_FILE = "highscore.txt"
 
 
-# ---------------------------------------
+
 # LOAD HIGH SCORE
-# ---------------------------------------
+
 def read_high_score():
     if not os.path.exists(HIGHSCORE_FILE):
         return 0
@@ -26,9 +26,9 @@ def read_high_score():
         return 0
 
 
-# ---------------------------------------
+
 # SAVE HIGH SCORE
-# ---------------------------------------
+
 def write_high_score(score):
     try:
         with open(HIGHSCORE_FILE, "w") as f:
@@ -37,9 +37,9 @@ def write_high_score(score):
         pass
 
 
-# -------------------------------------------------
+
 # LEVEL TRANSITION SCREEN  (Score ≥ 500)
-# -------------------------------------------------
+
 def show_level_transition(screen, level, duration_ms=1800):
     text = FONT_LARGE.render(f"LEVEL {level}", True, (255, 255, 255))
 
@@ -50,9 +50,9 @@ def show_level_transition(screen, level, duration_ms=1800):
         pygame.display.update()
 
 
-# -------------------------------------------------
+
 # GAME OVER SCREEN
-# -------------------------------------------------
+
 def game_over_screen(screen, score):
     high = read_high_score()
 
