@@ -13,7 +13,7 @@ class bullet:
 
         self.bulletX = self.player.playerX
         self.bulletY = 480
-        self.bulletY_change = 0.2
+        self.bulletY_change = 2
         self.bullet_state = "ready"
         self.bulletImg = pygame.image.load("assets/bullet.png")
 

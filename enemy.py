@@ -10,7 +10,7 @@ class asteroid:
         self.asteroidX = []
         self.asteroidY = []
         self.no_of_enemies=4
-        self.asteroidY_change = 0.05
+        self.asteroidY_change = 0.1
 
         for i in range(self.no_of_enemies):
             self.asteroidImg.append(pygame.image.load("assets/asteroid.png"))
@@ -44,8 +44,8 @@ class enemyShip:
         self.bulletX = []
         self.bulletY = []
         self.no_of_enemies=4
-        self.enemyShipY_change = 0.05
-        self.bulletY_change = 0.1
+        self.enemyShipY_change = 0.1
+        self.bulletY_change = 0.2
 
         for i in range(self.no_of_enemies):
             self.enemyImg.append(pygame.image.load("assets/rocket.png"))
